@@ -58,8 +58,7 @@ public final class LogbackSpanProcessor implements SpanProcessor {
     }
 
     @Override
-    public void onStart(Context parentContext, ReadWriteSpan span) {
-    }
+    public void onStart(Context parentContext, ReadWriteSpan span) {}
 
     private Appender<ILoggingEvent> getAppender(String targetAppenderName) {
         if (targetAppenderName == null || targetAppenderName.isBlank()) {
@@ -78,7 +77,8 @@ public final class LogbackSpanProcessor implements SpanProcessor {
             }
         }
 
-        throw new IllegalStateException("Failed to find logback appender with name='" + targetAppenderName + "'");
+        throw new IllegalStateException(
+                "Failed to find logback appender with name='" + targetAppenderName + "'");
     }
 
     public static class Builder {
@@ -86,8 +86,7 @@ public final class LogbackSpanProcessor implements SpanProcessor {
         private OtelToLogback converter;
         private String targetAppenderName;
 
-        Builder() {
-        }
+        Builder() {}
 
         public LogbackSpanProcessor build() {
             return new LogbackSpanProcessor(this.converter, this.targetAppenderName);

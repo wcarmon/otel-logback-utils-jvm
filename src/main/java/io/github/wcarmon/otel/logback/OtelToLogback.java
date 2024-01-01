@@ -2,11 +2,6 @@ package io.github.wcarmon.otel.logback;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.classic.spi.LoggingEvent;
@@ -15,6 +10,10 @@ import io.opentelemetry.api.common.Attributes;
 import io.opentelemetry.sdk.trace.data.EventData;
 import io.opentelemetry.sdk.trace.data.SpanData;
 import io.opentelemetry.sdk.trace.data.StatusData;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.LoggerFactory;
 
@@ -144,8 +143,7 @@ public final class OtelToLogback {
         private @Nullable Level defaultLevel;
         private String loggerName;
 
-        Builder() {
-        }
+        Builder() {}
 
         public OtelToLogback build() {
             return new OtelToLogback(this.loggerName, this.defaultLevel);
