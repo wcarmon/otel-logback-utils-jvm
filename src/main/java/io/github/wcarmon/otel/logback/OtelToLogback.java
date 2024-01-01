@@ -144,7 +144,8 @@ public final class OtelToLogback {
         private @Nullable Level defaultLevel;
         private String loggerName;
 
-        Builder() {}
+        Builder() {
+        }
 
         public OtelToLogback build() {
             return new OtelToLogback(this.loggerName, this.defaultLevel);

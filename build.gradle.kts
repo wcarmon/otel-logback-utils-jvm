@@ -2,7 +2,7 @@ import com.diffplug.gradle.spotless.SpotlessExtension
 
 val mvnGroupId = "io.github.wcarmon"
 val mvnArtifactId = "otel-logback-utils-jvm" // see settings.gradle.kts
-val mvnVersion = "1.0.3"
+val mvnVersion = "1.0.4"
 
 val ossrhPassword: String = providers.gradleProperty("ossrhPassword").getOrElse("")
 val ossrhUsername: String = providers.gradleProperty("ossrhUsername").getOrElse("")
@@ -32,6 +32,7 @@ dependencies {
 
     implementation("ch.qos.logback:logback-classic:1.4.14")
     implementation("io.opentelemetry:opentelemetry-api:1.33.0")
+    implementation("io.opentelemetry:opentelemetry-context:1.33.0")
     implementation("io.opentelemetry:opentelemetry-sdk:1.33.0")
     implementation("org.jetbrains:annotations:24.1.0")
 
@@ -46,6 +47,22 @@ dependencies {
 java {
     withJavadocJar()
     withSourcesJar()
+}
+
+tasks.withType<Test>().configureEach {
+
+    jvmArgs("--enable-preview")
+
+    failFast = true // marks others after failure as ignored
+    useJUnitPlatform {
+        excludeTags.add("e2e")
+    }
+
+    testLogging {
+        events("passed", "skipped", "failed", "standardOut", "standardError")
+        showExceptions = true
+        showStandardStreams = true
+    }
 }
 
 publishing {
